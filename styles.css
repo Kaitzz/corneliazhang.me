@@ -121,7 +121,7 @@ h1 span { color: var(--violet); }
 .impact strong { font-size: clamp(1.55rem, 2.8vw, 2.35rem); font-weight: 640; letter-spacing: -0.045em; }
 .impact span { margin-top: 0.45rem; color: var(--muted); font-size: 0.78rem; letter-spacing: 0.04em; }
 
-.work { max-width: 68rem; margin-inline: auto; padding: 7rem 0; }
+.work { max-width: 64.5rem; margin-inline: auto; padding: 7rem 0; }
 .section-heading { display: grid; grid-template-columns: 0.65fr 1.35fr; align-items: start; gap: 2rem; margin-bottom: 3.5rem; }
 .section-label { color: var(--muted); }
 
@@ -133,7 +133,7 @@ h1 span { color: var(--violet); }
   line-height: 1.02;
 }
 
-.project-list { position: relative; height: 31rem; isolation: isolate; container-type: inline-size; }
+.project-list { position: relative; height: 29.5rem; isolation: isolate; container-type: inline-size; }
 .project-card {
   position: absolute;
   top: 0;
@@ -246,7 +246,13 @@ footer { display: flex; align-items: center; justify-content: space-between; pad
 footer p { margin: 0; }
 a:focus-visible { border-radius: 0.25rem; outline: 3px solid rgba(99, 66, 245, 0.4); outline-offset: 4px; }
 
-@media (max-width: 60rem) {
+@media (min-width: 52.001rem) and (max-width: 70rem) {
+  .project-card:hover,
+  .project-card:focus,
+  .project-card:focus-within { width: 100%; }
+}
+
+@media (max-width: 52rem) {
   .project-list {
     display: flex;
     height: auto;
@@ -254,8 +260,9 @@ a:focus-visible { border-radius: 0.25rem; outline: 3px solid rgba(99, 66, 245, 0
     overflow-x: auto;
     padding-bottom: 1rem;
     scroll-snap-type: x mandatory;
-    scrollbar-width: thin;
+    scrollbar-width: none;
   }
+  .project-list::-webkit-scrollbar { display: none; }
   .project-card,
   .project-card:hover,
   .project-card:focus,
@@ -266,9 +273,9 @@ a:focus-visible { border-radius: 0.25rem; outline: 3px solid rgba(99, 66, 245, 0
     bottom: auto;
     left: auto;
     width: auto;
-    min-width: min(82vw, 29rem);
-    height: 31rem;
-    flex: 0 0 min(82vw, 29rem);
+    min-width: min(82vw, 27.5rem);
+    height: 29.5rem;
+    flex: 0 0 min(82vw, 27.5rem);
     scroll-snap-align: start;
   }
   .project-intro,
