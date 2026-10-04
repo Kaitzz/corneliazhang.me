@@ -111,7 +111,7 @@ h1 span { color: var(--violet); }
 
 .impact {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
 }
@@ -294,9 +294,6 @@ a:focus-visible { border-radius: 0.25rem; outline: 3px solid rgba(99, 66, 245, 0
   .hero { min-height: auto; padding: 7rem 0 6rem; }
   .hero-footer, .section-heading, .about, .contact { grid-template-columns: 1fr; }
   .hero-footer { align-items: start; gap: 1.5rem; }
-  .impact { grid-template-columns: repeat(2, 1fr); }
-  .impact div:nth-child(3) { border-left: 0; }
-  .impact div:nth-child(n + 3) { border-top: 1px solid var(--line); }
   .work { padding: 6rem 0; }
   .about, .contact { gap: 1.5rem; padding: 5rem 0; }
 }
