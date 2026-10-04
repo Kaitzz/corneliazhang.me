@@ -1,5 +1,7 @@
 # corneliazhang.me
 
-The source for Cornelia Zhang's personal website.
+Cornelia Zhang's personal portfolio, featuring production software and applied AI projects.
 
-This first version is a framework-free static page intended for GitHub Pages.
+[Visit corneliazhang.me](https://corneliazhang.me)
+
+Built with HTML and CSS, and hosted on GitHub Pages.
