@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#fbf9ff">
+    <meta
+      name="description"
+      content="MilkyAi turns Bilibili videos into summaries, transcripts, translations, and Markdown notes."
+    >
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="MilkyAi — Your beloved video assistant">
+    <meta
+      property="og:description"
+      content="Video summaries, transcripts, translation, and Markdown notes for Bilibili."
+    >
+    <meta property="og:url" content="https://corneliazhang.me/milky">
+    <meta name="twitter:card" content="summary">
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23ffffff'/%3E%3Cpath d='M14 46V18h7l11 17 11-17h7v28h-7V29L32 46 21 29v17z' fill='%23554b72'/%3E%3C/svg%3E"
+    >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@300..900&family=Nunito+Sans:opsz,wght@6..12,300..900&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="./styles.css">
+    <title>MilkyAi — Your beloved video assistant</title>
+  </head>
+  <body>
+    <div class="color-field" aria-hidden="true">
+      <div class="field-layer field-layer-pink"></div>
+      <div class="field-layer field-layer-blue"></div>
+      <div class="field-layer field-layer-purple"></div>
+      <div class="pointer-field"></div>
+    </div>
+    <div class="grain" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="brand-mark" aria-hidden="true">M</div>
+      <div class="language-switch" role="group" aria-label="Language">
+        <button type="button" data-lang="en" aria-pressed="true">EN</button>
+        <span aria-hidden="true"></span>
+        <button type="button" data-lang="zh" aria-pressed="false">中</button>
+      </div>
+    </header>
+
+    <main class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow" data-i18n="eyebrow">Bilibili video intelligence</p>
+        <h1>MilkyAi</h1>
+        <p class="tagline" data-i18n="tagline">Your beloved video assistant on Bilibili.</p>
+        <p class="capabilities" data-i18n="capabilities">
+          Video Summaries <span>·</span> Transcripts <span>·</span> Translation <span>·</span> Markdown Notes
+        </p>
+      </div>
+
+      <div class="proof-and-action">
+        <a
+          class="follower-link"
+          href="https://space.bilibili.com/3461574540921489"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-i18n-aria="followerAria"
+        >
+          <img
+            src="https://i0.hdslb.com/bfs/face/a76c57c72ba39438bc6e271f31b7b9e962f24041.jpg"
+            alt=""
+            width="42"
+            height="42"
+            referrerpolicy="no-referrer"
+          >
+          <span class="follower-copy">
+            <strong id="follower-count" aria-live="polite">38K+</strong>
+            <span id="follower-label">followers on Bilibili</span>
+          </span>
+        </a>
+
+        <a
+          class="profile-link"
+          href="https://space.bilibili.com/3461574540921489"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-i18n-aria="ctaAria"
+        >
+          <span data-i18n="ctaPrefix">Visit MilkyAi on</span>
+          <img class="bilibili-logo" src="./Bilibili_logo.svg" alt="" aria-hidden="true">
+          <span data-i18n="ctaSuffix"></span>
+        </a>
+      </div>
+    </main>
+
+    <p class="footer-note" data-i18n="footer">Made for curious minds and long videos.</p>
+
+    <script src="./app.js" defer></script>
+  </body>
+</html>
