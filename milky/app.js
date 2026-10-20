@@ -2,11 +2,14 @@
   "use strict";
 
   const PROFILE_URL = "https://space.bilibili.com/3461574540921489";
-  const FOLLOWER_API =
+  const FOLLOWER_PROXY =
     "https://bilibili-follower-proxy.corneliazhang.workers.dev/?mid=3461574540921489";
+  const FOLLOWER_SNAPSHOT = "./followers.json";
+  const FOLLOWER_REMOTE_SNAPSHOT =
+    "https://raw.githubusercontent.com/Kaitzz/corneliazhang.me/main/milky/followers.json";
   const LANGUAGE_KEY = "milky-landing-language";
   const FOLLOWER_KEY = "milky-landing-followers";
-  const FALLBACK_COUNT = 38000;
+  const FALLBACK_COUNT = 40000;
 
   const copy = {
     en: {
@@ -155,33 +158,69 @@
     return null;
   }
 
-  async function refreshFollowers() {
+  function followerFromPayload(payload) {
+    const count = payload?.data?.follower ?? payload?.follower;
+    if (!Number.isFinite(count) || count < 0) {
+      throw new Error("Follower source returned an invalid count");
+    }
+    return count;
+  }
+
+  async function fetchFollowerCount(url, timeoutMs) {
     const controller = new AbortController();
-    const timeout = window.setTimeout(() => controller.abort(), 6500);
+    const timeout = window.setTimeout(() => controller.abort(), timeoutMs);
     try {
-      const response = await fetch(FOLLOWER_API, {
+      const response = await fetch(url, {
         signal: controller.signal,
         headers: { Accept: "application/json" },
+        cache: "no-store",
       });
-      if (!response.ok) throw new Error(`Follower API returned ${response.status}`);
+      if (!response.ok) throw new Error(`Follower source returned ${response.status}`);
       const payload = await response.json();
-      if (!Number.isFinite(payload.follower) || payload.follower < 0) {
-        throw new Error("Follower API returned an invalid count");
-      }
-      followerCount = payload.follower;
-      try {
-        localStorage.setItem(
-          FOLLOWER_KEY,
-          JSON.stringify({ count: followerCount, updatedAt: Date.now() }),
-        );
-      } catch (_) {
-        // A fresh count can still be shown without local storage.
-      }
-      setLanguage(document.documentElement.lang.startsWith("zh") ? "zh" : "en", false);
-    } catch (error) {
-      console.info("[MilkyAi] Live follower count unavailable; using cached fallback.", error);
+      return followerFromPayload(payload);
     } finally {
       window.clearTimeout(timeout);
+    }
+  }
+
+  function showFollowerCount(count) {
+    followerCount = count;
+    try {
+      localStorage.setItem(
+        FOLLOWER_KEY,
+        JSON.stringify({ count: followerCount, updatedAt: Date.now() }),
+      );
+    } catch (_) {
+      // A fresh count can still be shown without local storage.
+    }
+    setLanguage(document.documentElement.lang.startsWith("zh") ? "zh" : "en", false);
+  }
+
+  async function refreshFollowers() {
+    let snapshotAvailable = false;
+
+    try {
+      showFollowerCount(await fetchFollowerCount(FOLLOWER_SNAPSHOT, 3000));
+      snapshotAvailable = true;
+    } catch (error) {
+      console.info("[MilkyAi] Local follower snapshot unavailable.", error);
+    }
+
+    try {
+      showFollowerCount(await fetchFollowerCount(FOLLOWER_REMOTE_SNAPSHOT, 4000));
+      snapshotAvailable = true;
+    } catch (error) {
+      if (!snapshotAvailable) {
+        console.info("[MilkyAi] Remote follower snapshot unavailable.", error);
+      }
+    }
+
+    try {
+      showFollowerCount(await fetchFollowerCount(FOLLOWER_PROXY, 6500));
+    } catch (error) {
+      if (!snapshotAvailable) {
+        console.info("[MilkyAi] Live follower count unavailable; using cached fallback.", error);
+      }
     }
   }
 
